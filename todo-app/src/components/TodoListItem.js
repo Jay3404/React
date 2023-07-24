@@ -5,15 +5,25 @@ import {
     MdRemoveCircleOutline
 } from 'react-icons/md';
 import '../scss/TodoListItem.scss';
+import cn from 'classnames';
 
-const TodoListItem = () => {
+const TodoListItem = ({todo, removeTodos, checkedTodos}) => {
+  // 비구조할당으로 props 내용 분리
+  const {id, text, checked} = todo;
+
   return (
     <div className='TodoListItem'>
-        <div className='checkbox'>
-            <MdCheckBoxOutlineBlank></MdCheckBoxOutlineBlank>
-            <div className='text'>할 일</div>
+        {/* classnames 라이브러리를 이용한 조건부 스타일 적용 */}
+        {/* checked인 클래스를 조건부로 추가하기 위한 코드 */}
+        <div className={cn('checkbox', {checked})} onClick={() => checkedTodos(id)}>
+            {
+              checked ?
+              <MdCheckBox></MdCheckBox> : 
+              <MdCheckBoxOutlineBlank></MdCheckBoxOutlineBlank>
+            }
+            <div className='text'>{text}</div>
         </div>
-        <div className='remove'>
+        <div className='remove' onClick={() => removeTodos(id)}>
             <MdRemoveCircleOutline></MdRemoveCircleOutline>
         </div>
     </div>
