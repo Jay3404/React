@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import NewsPage from './pages/NewsPage';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <div>
-        <button onClick={}>데이터 불러오기</button>
-      </div>
-    </div>
+    <Routes>
+      <Route path='/' element={<NewsPage></NewsPage>}></Route>
+      <Route path='/:category' element={<NewsPage></NewsPage>}></Route>
+    </Routes>
   );
 }
 

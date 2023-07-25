@@ -58,19 +58,20 @@ const Category = styled(NavLink)`
         color: #495057;
     }
 
-    &.active {
-        font-weight: 600;
-        border-bottom: 2px solid #22b8cf;
-        color: #22b8cf;
-        &:hover {
-            color: #3bc9db;
-        }
-    }
-
     & + & {
         margin-left: 1rem;
     }
 
+    ${props => 
+        props.active && css`
+            font-weight: 600;
+            border-bottom: 2px solid #22b8cf;
+            color: #22b8cf;
+            &:hover {
+                color: #3bc9db;
+            }
+        `
+    }
 `;
 
 const Categories = ({category, changeCategory}) => {
@@ -78,7 +79,7 @@ const Categories = ({category, changeCategory}) => {
     <CategoriesBlock>
         {categories && categories.map(
             cate => (
-                <Category key={cate.name} to={cate.name === 'all' ? '/' : `/${cate.name}`} onClick={() => changeCategory(cate.name)} className={({isActive}) => (isActive ? 'active' : undefined) }>{cate.text}</Category>
+                <Category key={cate.name} onClick={() => changeCategory(cate.name)} active={category === cate.name}>{cate.text}</Category>
             )
         )}
     </CategoriesBlock>
