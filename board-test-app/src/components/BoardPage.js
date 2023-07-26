@@ -1,8 +1,6 @@
 import React from 'react'
 
-
-
-const BoardItem = ({board}) => {
+const BoardPage = ({board}) => {
     const {boardNo, boardTitle, boardContent, boardWriter, boardRegdate, boardCnt} = board;
     
   return (
@@ -33,4 +31,4 @@ const BoardItem = ({board}) => {
   )
 }
 
-export default BoardItem
+export default BoardPage

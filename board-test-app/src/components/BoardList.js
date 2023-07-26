@@ -1,48 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import BoardItem from './BoardItem';
 import styled from 'styled-components';
+import BoardListItem from './BoardListItem';
+import BoardCellTitle from './BoardCellTitle';
+
+const BoardListBlock = styled.div`
+    width: 100%;
+`;
 
 const BoardList = () => {
-    const [boards, setBoards] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [boardList, setBoardList] = useState([]);
 
     useEffect(() => {
+        const getBoardList = async () => {
+            try {
+                const response = await axios.get('http://localhost:9090/api/board-list');
 
-      const loadData = async () => {
-        try {
-          const response = await axios.get('http://localhost:9090/api/board-list');
-          setBoards(() => response.data.pageItems.content);
-          console.log("보드")
-          console.log(JSON.stringify(boards));
-        } catch(error) {
-          console.log(error);
+                console.log(response);
+                setBoardList(() => response.data.pageItems.content);
+            } catch(error) {
+                console.log(error);
+            }
         }
-      }
 
-      loadData();
-
-    }, [boards])
-
-
-
-    if(loading) {
-      return <>로딩 중</>
-    }
-
-    if(!boards) {
-      return null;
-    }
-
+        getBoardList();
+    }, []);
   return (
-    <>
-      {boards && boards.map(
-        board => (
-          <BoardItem key={board.boardNo} board={board}></BoardItem>
-        )
-      )}
-    </>
+    <BoardListBlock>
+        <BoardCellTitle></BoardCellTitle>
+        {boardList && boardList.map(
+            board => (
+                <BoardListItem board={board}></BoardListItem>
+            )
+        )}
+    </BoardListBlock>
   );
 };
 
-export default BoardList
+export default BoardList;
