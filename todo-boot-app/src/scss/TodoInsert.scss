@@ -11,8 +11,9 @@
         font-size: 1.125rem;
         line-height: 1.5;
         color: white;
+        //placeholer가 있을 때
         &::placeholder {
-            color: rgb(255, 255, 255);
+            color: rgb(187, 184, 184);
         }
 
         //버튼 영역을 제외한 영역을 모두 차지
@@ -21,7 +22,7 @@
 
     //TodoInsert 자손 button 태그
     button {
-        background: rgb(144, 144, 144);
+        background: rgb(146, 143, 143);
         outline: none;
         border: none;
         color: white;
@@ -33,9 +34,8 @@
         justify-content: center;
         cursor: pointer;
         transition: 0.1s background ease-in;
-        &:hover{
+        &:hover {
             background: #abd5bd;
         }
-
     }
 }

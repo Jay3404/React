@@ -7,10 +7,10 @@
 
     //TodoTemplate 클래스의 자손 태그 app-title 클래스
     .app-title {
-        background: rgb(34, 97, 61);
+        background: rgb(25, 105, 105);
         color: white;
         height: 4rem;
-        font-size: 1.5 rem;
+        font-size: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -20,5 +20,4 @@
     .content {
         background: white;
     }
-
 }

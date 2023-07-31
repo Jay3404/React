@@ -10,38 +10,41 @@ import {
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Join = () => {
+const Login = () => {
     const navi = useNavigate();
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
 
         const data = new FormData(e.target);
-
         const username = data.get("username");
         const password = data.get("password");
 
-        join(username, password);
+        login(username, password);
     }, []);
 
-    const join = useCallback(async (username, password) => {
+    const login = useCallback(async (username, password) => {
         try {
-            const response = await axios.post('http://localhost:9090/api/member/join', {username: username, password: password});
+            const response = await axios.post('http://localhost:9090/api/member/login', {username: username, password: password});
 
-            if(response.data && response.data.statusCode === 200) {
-                navi("/login");
+            if(response.data && response.data.item.token !== null && response.data.item.token !== "") {
+                localStorage.setItem("ACCESS_TOKEN", response.data.item.token);
+                navi("/");
             }
-        } catch(error) {
-            console.log(error);
+
+            console.log(response);
+        } catch(e) {
+            alert(e.response.data.errorMessage);
         }
     }, []);
+
   return (
     <Container component="main" maxWidth="xs" style={{marginTop: "8%"}}>
         <form onSubmit={onSubmit}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Typography component="h1" variant="h5">
-                        회원가입
+                        로그인
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -67,13 +70,13 @@ const Join = () => {
                     ></TextField>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button type='submit' fullWidth variant='contained' color='primary'>회원가입</Button>
+                    <Button type='submit' fullWidth variant='contained' color='primary'>로그인</Button>
                 </Grid>
             </Grid>
             <Grid container justifyContent="flex-end">
                 <Grid item>
-                    <Link href='/login' variant='body2'>
-                        이미 계정이 있습니까? 로그인하세요.
+                    <Link href='/join' variant='body2'>
+                        계정이 없으시면 여기서 회원가입하세요.
                     </Link>
                 </Grid>
             </Grid>
@@ -82,4 +85,4 @@ const Join = () => {
   );
 };
 
-export default Join;
+export default Login;
