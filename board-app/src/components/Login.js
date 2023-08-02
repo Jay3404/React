@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Login.css';
 
-const Login = () => {
+const Login = ({ setIsLogin }) => {
     const navi = useNavigate();
 
     const [userId, setUserId] = useState('');
@@ -32,8 +32,9 @@ const Login = () => {
                 console.log(response);
 
                 if (response.data && response.data.item.token) {
-                    localStorage.setItem("ACCESS_TOKEN", response.data.item.token);
                     alert(`${response.data.item.userName}님, 반갑습니다`);
+                    sessionStorage.setItem("ACCESS_TOKEN", response.data.item.token);
+                    setIsLogin(true);
                     navi('/');
                 }
 

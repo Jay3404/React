@@ -14,7 +14,7 @@ const UserNavItem = styled.li`
     font-size: 0.9rem;
 `
 
-const Layout = () => {
+const Layout = ({ isLogin }) => {
     return (
         <>
             <header>
@@ -30,7 +30,7 @@ const Layout = () => {
                 </nav>
                 <nav>
                     {
-                        localStorage.getItem("ACCESS_TOKEN") ?
+                        isLogin && sessionStorage.getItem("ACCESS_TOKEN") ?
                             <UserNav>
                                 <UserNavItem>
                                     <Link to="/mypage">마이페이지</Link>
