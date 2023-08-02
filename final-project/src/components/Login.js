@@ -14,9 +14,7 @@ import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import * as React from 'react';
-
-
+import React from 'react';
 
 const Login = () => {
 
@@ -122,7 +120,7 @@ const Login = () => {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
+                                    <Link href="<Join></Join>" variant="body2">
                                         {"계정이 없으신가요?"}
                                     </Link>
                                 </Grid>
